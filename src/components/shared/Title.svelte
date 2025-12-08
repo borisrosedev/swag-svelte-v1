@@ -1,0 +1,19 @@
+<script lang="ts">
+    let { hType, content, classNames } = $props()
+</script>
+
+{#if hType == 'h1' }
+  <h1 class={classNames ?? ''}>{content}</h1>
+{:else if hType == '2'}
+  <h2>{content}</h2>
+{:else if hType == '3'}
+  <h3>{content}</h3>
+{:else}
+  <h4>{content}</h4>
+{/if}
+
+<style>
+
+
+
+</style>
