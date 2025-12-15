@@ -12,15 +12,33 @@
             </ul>
         </nav>
 </header>
-<main class="bg-[url(bg.jpg)] bg-[rgba(0,0,0,0.8)] bg-blend-overlay bg-center bg-cover bg-no-repeat min-h-[100vh] flex items-center justify-center">
-    <section class="w-[300px]">
-        <Form {fields} {buttons} />
+<main class="px-[20px] pb-[200px] pt-[15vh] bg-[url(bg.jpg)] bg-[rgba(0,0,0,0.8)] bg-blend-overlay bg-center bg-cover bg-no-repeat min-h-[100vh] flex flex-col  justify-center md:flex-row">
+    <section class="h-full md:h-[500px] bg-[var(--custom-primary-color)] rounded-lg text-white flex items-center justify-center md:w-[600px] w-full md:w-[300px] md:mx-[20px] my-[0px] md:my-[20px]">
+        <OneImageMessage  data={oneImageMessage} classNames/>
+    </section>
+    
+    <section class="flex justify-center my-[30px] w-full md:p-[20px]">
+        <BigForm {formClassNames} {aFields} {bFields} {buttons} {helpers}/>
     </section>
 </main>
 <script>
-	import Form from "../../components/form/Form.svelte";
+	import BigForm from "../../components/form/BigForm.svelte";
+	import OneImageMessage from "../../components/shared/OneImageMessage.svelte";
 
-    const fields = [
+    const formClassNames = 'flex flex-col w-[600px] md:w-full'
+
+
+    const oneImageMessage = {
+        image: {
+            src: 'swag.png',
+            alt: 'Logo of the Swag App'
+        },
+        message: {
+            content: 'Hello the newbie ! We are so pleased you wish to become a part of the family. You will have 20 points of fidelity as soon as you have finished creating your account. You will see that they will allow you to receive mini gifts along the way.'
+        }
+    }
+
+    const aFields = [
         {
             id: 'firstname',
             label: 'Firstname'
@@ -28,24 +46,57 @@
         {
             id: 'lastname',
             label: 'Lastname'
-        },
-        {
+        }   
+    ]
+
+       const bFields = [
+         {
             id: 'email',
             type: 'email',
-            label: 'Email'
+            label: 'Email',
+            helper: 'ex: johndoe@gmail.com'
         },
         {
             id: 'password',
             type: 'password',
-            label: 'Password'
+            label: 'Password',
+            helper: 'The password should have at least 12 characters'
         },
-       
+        {
+            id: 'confirmed-password',
+            type: 'password',
+            label: 'Confirm the password'
+        }
     ]
+
+    const helpers = [
+        {
+            data: {
+                mainContent: 'You would like to see our terms of contract ?',
+                linkContent: 'Read it here',
+                href: '/terms-of-contract'
+            },
+            aClassNames: 'text-sm text-white underline',
+            pClassNames: 'text-sm text-[var(--custom-third-color)]'
+        },
+        {
+            data: {
+                mainContent: 'You already have an account ?',
+                linkContent: 'Log in here',
+                href: '/login',
+            },    
+            aClassNames: 'text-sm text-white underline',
+            pClassNames: 'text-sm text-[var(--custom-third-color)]'
+        }
+    ]
+
+ 
 
     const buttons = [
         {
             type:'submit',
-            content: 'Submit'
+            content: 'Submit',
+            classNames: 'px-[30px] duration-300 ease-in rounded-lg text-white hover:cursor-pointer py-[10px] bg-[var(--custom-third-color)] hover:bg-[var(--custom-secondary-color)] transition-all'
         }
     ]
 

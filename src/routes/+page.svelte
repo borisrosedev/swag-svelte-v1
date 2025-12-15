@@ -9,6 +9,7 @@
     import PRODUCTS from "../data/products";
 	import filterProducts from "../utils/filter-products";
 	import productToImage from "../utils/product-to-image";
+    import { goto } from '$app/navigation'
 
  
     
@@ -22,7 +23,7 @@
         buttons: [
             {
                 content: 'Read the article',
-                classNames: 'px-[30px] rounded-lg py-[10px] bg-[var(--custom-secondary-color)] hover:bg-[var(--custom-third-color)] hover:cursor-pointer'
+                classNames: 'px-[30px] rounded-lg py-[10px] bg-[var(--custom-secondary-color)] text-white hover:bg-[var(--custom-third-color)] hover:cursor-pointer'
             }
         ]
     }
@@ -47,6 +48,7 @@
     const buttons = [
         {
             content: 'join us now',
+            handler: onJoinUs,
             classNames: 'uppercase bg-[rgb(100,0,180)] hover:bg-[rgb(100,0,200)] hover:cursor-pointer rounded-xl text-white px-[30px] py-[8px]'
         }
     ]
@@ -78,6 +80,14 @@
         }
     ]
 
+
+    //handlers 
+
+
+    function onJoinUs(){
+        goto('/register')
+    }
+
 </script>
 <header class="fixed top-0 left-0 right-0 p-[20px] flex align-center justify-between">
         <figure class="w-[60px] h-[60px] border border-black">
@@ -102,9 +112,9 @@
         <span class="my-[10px] text-2xl inter text-white">Cool looks, Effortless vibe</span>
     </section>
 
-    <section class="flex flex-row items-center justify-center">
+    <section class="flex flex-col md:flex-row items-center justify-center">
         {#each trustBadges as tb }
-            <TrustBadge data={tb} />
+            <TrustBadge data={tb} classNames={'flex flex-row text-white my-[5px] md:my-[0px]'} />
         {/each}
     </section>
 
@@ -115,20 +125,23 @@
     </section>
     
 
-    <section class="flex">
-        <section class="flex items-center justify-center">
+    <section class="flex flex-col md:flex-row">
+        <section class="flex items-center justify-center flex-col">
+                <Title hType="h2" classNames="my-[10px] text-white text-3xl" content="The new Lolita" />
                 <TwoImageCtaCard data={twoImageCtaCard} />
         </section>
-        <section class="flex items-center justify-center">
+        <section class="flex items-center justify-center sm:my-[10px] md:my-[10px] flex-col">
+            <Title hType="h2" classNames="my-[10px] text-white text-3xl" content="Salgado tells us everything" />
             <OneDesignerDescriptionCtaCard data={oneDesignerDescriptionCtaCard} />
         </section>
-        <section class="flex flex-col">
-            <section class="flex flex-row">
+        <section class="flex flex-col items-center sm:self-center md:self-start">
+            <Title hType="h2" classNames="my-[10px] text-white text-3xl" content="Our top products" />
+            <section class="flex flex-row sm:my-[10px] md:my-[10px] flex-wrap w-full gap-[10px]">
                 {#each filterProducts(PRODUCTS) as product}
-                    <OneImageCtaCard data={productToImage(product, 0, 'mx-[10px] w-[150px] h-[150px]')} />
+                    <OneImageCtaCard data={productToImage(product, 0, 'mx-[10px] md:mx-[0px] sm:mx-[0px] w-[150px] h-[150px]')} />
                 {/each}
             </section>
-            <section class="flex items-center justify-center my-[20px]">
+            <section class="flex w-full my-[20px] justify-center">
                 <Button data={{content: 'Show all products', classNames: 'px-[30px] py-[10px] rounded-lg hover:cursor-pointer text-white bg-[var(--custom-third-color)] hover:bg-[var(--custom-secondary-color)]'}}/>
             </section>
 

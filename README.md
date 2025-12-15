@@ -252,3 +252,27 @@ export function increment() {
 	count += 1;
 }
 ```
+
+
+## goto
+
+
+Allows you to navigate programmatically to a given route, with options such as keeping the current element focused. Returns a Promise that resolves when SvelteKit navigates (or fails to navigate, in which case the promise rejects) to the specified url.
+
+For external URLs, use window.location = url instead of calling goto(url).
+
+```ts
+function goto(
+	url: string | URL,
+	opts?: {
+		replaceState?: boolean | undefined;
+		noScroll?: boolean | undefined;
+		keepFocus?: boolean | undefined;
+		invalidateAll?: boolean | undefined;
+		invalidate?:
+			| (string | URL | ((url: URL) => boolean))[]
+			| undefined;
+		state?: App.PageState | undefined;
+	}
+): Promise<void>;
+```
